@@ -1,23 +1,20 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationsService {
-  isPokemonAdded = false;
-  isPokemonDeleted = false;
+  
+  constructor() {}
 
-  showAddedPokemonNotif() {
-    this.isPokemonAdded = true;
-    setTimeout(() => {
-      this.isPokemonAdded = false;
-    }, 3000);
+  showNotif() {
+    
   }
 
-  showDeletedPokemonNotif() {
-    this.isPokemonDeleted = true;
+  showDeletingNotif() {
+    this.isDataDeleted = true;
     setTimeout(() => {
-      this.isPokemonDeleted = false;
+      this.isDataDeleted = false;
     }, 3000);
   }
 }

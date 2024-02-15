@@ -1,0 +1,21 @@
+import { Component } from '@angular/core';
+import { NotificationsService } from 'src/app/services/notifications.service';
+
+@Component({
+  selector: 'app-notifications',
+  templateUrl: './notifications.component.html',
+  styleUrls: ['./notifications.component.scss'],
+})
+export class NotificationsComponent {
+  
+  
+  constructor(private notificationsService: NotificationsService) {}
+
+  onDataDelete() {
+    this.notificationsService.showAddingNotif();
+  }
+
+  onDataAdd() {
+    this.notificationsService.showDeletingNotif();
+  }
+}

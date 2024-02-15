@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon';
+import { LoggingService } from 'src/app/services/logging.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
@@ -10,20 +11,38 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 })
 export class PokemonListComponent {
   newPokemonName?: string;
+  isPokemonAdded = false;
+  isPokemonDeleted = false;
 
   pokemons: Pokemon[] = this.pokemonService.pokemons;
 
   constructor(
     private pokemonService: PokemonService,
-    public notificationsService: NotificationsService
+    private notificationsService: NotificationsService
   ) {}
 
   onAddPokemonBtnClick() {
     if (this.newPokemonName === undefined) return;
     this.pokemonService.addPokemon(this.newPokemonName);
+    this.notificationsService.showAddingNotif();
   }
 
   onPokemonDelete(index: number) {
     this.pokemonService.deletePokemon(index);
+    this.notificationsService.showDeletingNotif();
+  }
+
+  showDeletedPokemonNotif() {
+    this.isPokemonDeleted = true;
+    setTimeout(() => {
+      this.isPokemonDeleted = false;
+    }, 3000);
+  }
+  getAddingNotifications() {
+    return this.notificationsService.isDataAdded;
+  }
+
+  getDeletingNotifications() {
+    return this.notificationsService.isDataDeleted;
   }
 }

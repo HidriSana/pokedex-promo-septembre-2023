@@ -3,7 +3,9 @@
     <input class="form-control" type="text" [(ngModel)]="newPokemonName" />
   </div>
   <div class="col-2">
-    <button (click)="onAddPokemonBtnClick()" class="btn btn-primary">ajouter</button>
+    <button (click)="onAddPokemonBtnClick()" class="btn btn-primary">
+      ajouter
+    </button>
   </div>
 </div>
 
@@ -18,10 +20,15 @@
 </div>
 
 <div
-  *ngIf="notificationsService.isPokemonAdded || notificationsService.isPokemonDeleted"
+  *ngIf="getAddingNotifications() || getDeletingNotifications()"
   class="notification my-4 p-3 bg-success text-light"
-  [ngClass]="{ 'bg-success': notificationsService.isPokemonAdded, 'bg-danger': notificationsService.isPokemonDeleted }"
+  [ngClass]="{
+    'bg-success': getAddingNotifications(),
+    'bg-danger': getDeletingNotifications()
+  }"
 >
-  <span *ngIf="notificationsService.isPokemonAdded">Le pokémon {{ newPokemonName }} a été ajouté</span>
-  <span *ngIf="notificationsService.isPokemonDeleted">Le pokémon a été supprimé</span>
+  <span *ngIf="getAddingNotifications()"
+    >Le pokémon {{ newPokemonName }} a été ajouté</span
+  >
+  <span *ngIf="getDeletingNotifications()">Le pokémon a été supprimé</span>
 </div>
